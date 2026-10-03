@@ -1,4 +1,6 @@
-#pragma once
+#ifndef POSITION
+#define POSITION
+
 #include "Bitboards.h"
 
 enum enumSquare {
@@ -16,14 +18,13 @@ enum enumPiece {
 	white, black, pawn, knight, bishop, rook, queen, king
 };
 
-struct Board {
-private: 
-	U64 pieceBB[8];
-	int colorToMove;
-	int enPassantSQ;
-public: 
-	U64 getOccupancy()                               const { return pieceBB[white] | pieceBB[black]; };
-	U64 getOccupancy(enumPiece color)                const { return pieceBB[color]; };
-	U64 getBitboard(enumPiece color, enumPiece type) const { return pieceBB[color] & pieceBB[type]; };
-	U64 getBitboard(enumPiece type)                  const { return pieceBB[type]; };
-};
+U64 pieceBB[8];
+int colorToMove;
+int enPassantSQ;
+
+U64 occupancy(void);             // all pieces
+U64 occupancy_color(int color);  // all pieces of a color
+U64 pieces(int color, int type); // pieces of a color/type
+U64 pieces_type(int type);       // all pieces of a type
+
+#endif
