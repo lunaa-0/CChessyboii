@@ -14,19 +14,19 @@ extern const U64 DARK_SQUARES;
 
 extern const int LSB_64_TABLE[64];
 
-static inline void setBit(U64* bitboard, int square) {
+static inline void set_bit(U64* bitboard, int square) {
     *bitboard |= 1ULL << square;
 }
 
-static inline int getBit(U64 bitboard, int square) {
+static inline int get_bit(U64 bitboard, int square) {
     return (bitboard >> square) & 1ULL;
 }
 
-static inline void popBit(U64* bitboard, int square) {
+static inline void pop_bit(U64* bitboard, int square) {
     *bitboard &= ~(1ULL << square);
 }
 
-int bitScanForward(U64 bb);
-void printBitboard(U64 bb);
+int bit_scan_forward(U64 bb);
+void print_bitboard(U64 bb);
 
 #endif

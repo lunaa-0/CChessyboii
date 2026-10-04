@@ -3,6 +3,21 @@
 
 #include "Bitboards.h"
 
+/* bin   dec
+   0001    1  white king can castle to the king side
+   0010    2  white king can castle to the queen side
+   0100    4  black king can castle to the king side
+   1000    8  black king can castle to the queen side
+
+   examples:
+   1111       both sides can castle both directions
+   1001       black king => queen side
+			  white king => king side
+ */
+enum enumCastleRight {
+	white_short = 1, white_long = 2, black_short = 4, black_long = 8
+};
+
 enum enumSquare {
 	a1, b1, c1, d1, e1, f1, g1, h1,
 	a2, b2, c2, d2, e2, f2, g2, h2,
@@ -11,20 +26,29 @@ enum enumSquare {
 	a5, b5, c5, d5, e5, f5, g5, h5,
 	a6, b6, c6, d6, e6, f6, g6, h6,
 	a7, b7, c7, d7, e7, f7, g7, h7,
-	a8, b8, c8, d8, e8, f8, g8, h8, noSQ
+	a8, b8, c8, d8, e8, f8, g8, h8, no_sq
 };
 
 enum enumPiece {
 	white, black, pawn, knight, bishop, rook, queen, king
 };
 
-U64 pieceBB[8];
-int colorToMove;
-int enPassantSQ;
+// convert from ASCII char to encoded piece constant
+extern const unsigned char char_to_piece[17];
+typedef struct {
+	U64 piece_bb[8];
 
-U64 occupancy(void);             // all pieces
-U64 occupancy_color(int color);  // all pieces of a color
-U64 pieces(int color, int type); // pieces of a color/type
-U64 pieces_type(int type);       // all pieces of a type
+	int color_to_move;
+	int en_passant_sq;
+	int castle_right;
+	int half_move_clock;
+} Position;
+
+void parse_fen(Position* pos, const char* fen);
+
+U64 occupancy(Position* pos);             // all pieces
+U64 occupancy_color(Position* pos, int color);  // all pieces of a color
+U64 pieces(Position* pos, int color, int type); // pieces of a color/type
+U64 pieces_type(Position* pos, int type);       // all pieces of a type
 
 #endif

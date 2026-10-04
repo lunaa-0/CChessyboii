@@ -22,12 +22,12 @@ const int LSB_64_TABLE[64] = {
 };
 
 /**
- * bitScanForward
+ * bit_scan_forward
  * @author Matt Taylor (2003)
  * @param bb bitboard to scan
  * @return index (0..63) of least significant one bit
  */
-int bitScanForward(U64 bb) {
+int bit_scan_forward(U64 bb) {
 	U64 folded;
 	if (bb == 0) {
 		return -1;
@@ -37,7 +37,7 @@ int bitScanForward(U64 bb) {
 	return LSB_64_TABLE[folded * 0x78291ACF >> 26];
 }
 
-void printBitboard(U64 bb) {
+void print_bitboard(U64 bb) {
     for (int rank = 7; rank >= 0; rank--) {
         printf("%d  ", rank + 1);
         for (int file = 0; file < 8; file++) {
@@ -46,4 +46,5 @@ void printBitboard(U64 bb) {
         printf("\n");
     }
     printf("\n   a b c d e f g h\n");
+    printf("\n   Value : %llu\n", bb);
 }
