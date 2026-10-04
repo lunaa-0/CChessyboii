@@ -35,6 +35,9 @@ enum enumPiece {
 
 // convert from ASCII char to encoded piece constant
 extern const unsigned char char_to_piece[17];
+// convert from encoded piece constant to ASCII CHAR
+extern const unsigned char piece_to_char[8];
+
 typedef struct {
 	U64 piece_bb[8];
 
@@ -45,6 +48,7 @@ typedef struct {
 } Position;
 
 void parse_fen(Position* pos, const char* fen);
+void print_position(Position* pos);
 
 U64 occupancy(Position* pos);             // all pieces
 U64 occupancy_color(Position* pos, int color);  // all pieces of a color
