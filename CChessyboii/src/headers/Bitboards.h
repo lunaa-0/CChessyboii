@@ -1,7 +1,7 @@
 #ifndef BITBOARDS
 #define BITBOARDS
-
-#define U64 unsigned long long int
+#include <stdint.h>
+typedef uint16_t U64;
 
 extern const U64 A_FILE;
 extern const U64 H_FILE;
